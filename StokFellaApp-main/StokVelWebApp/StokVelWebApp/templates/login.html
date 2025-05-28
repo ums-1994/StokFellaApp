@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        color: #fff;
+      }
+      .hero-section {
+        padding: 4rem 0;
+        background: transparent;
+      }
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(45deg, #00ff88, #00a1ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero-subtitle {
+        font-size: 1.25rem;
+        color: #e0e0e0;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+      .feature-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .feature-card:hover {
+        transform: translateY(-5px);
+      }
+      .feature-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #00ff88;
+      }
+      .login-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+      }
+      .login-title {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: #fff;
+      }
+      .form-control {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+        padding: 0.75rem;
+        border-radius: 8px;
+      }
+      .form-control:focus {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #00ff88;
+        color: #fff;
+        box-shadow: none;
+      }
+      .btn-primary {
+        background: linear-gradient(45deg, #00ff88, #00a1ff);
+        border: none;
+        padding: 0.75rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: transform 0.3s ease;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        background: linear-gradient(45deg, #00e67a, #0091ff);
+      }
+      .nav-link {
+        color: #fff;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+      .nav-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #00ff88;
+      }
+      .pricing-section {
+        padding: 4rem 0;
+      }
+      
+      .pricing-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        height: 100%;
+        transition: transform 0.3s ease;
+        position: relative;
+      }
+      
+      .pricing-card:hover {
+        transform: translateY(-5px);
+      }
+      
+      .pricing-card.featured {
+        background: rgba(0, 255, 136, 0.1);
+        border-color: #00ff88;
+      }
+      
+      .popular-badge {
+        position: absolute;
+        top: -12px;
+        right: 20px;
+        background: #00ff88;
+        color: #000;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+      
+      .pricing-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      
+      .plan-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        display: block;
+      }
+      
+      .pricing-header h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #fff;
+      }
+      
+      .price {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #00ff88;
+        margin-bottom: 1rem;
+      }
+      
+      .price span {
+        font-size: 1rem;
+        color: #e0e0e0;
+      }
+      
+      .plan-description {
+        color: #e0e0e0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+      
+      .pricing-features {
+        margin: 2rem 0;
+      }
+      
+      .pricing-features ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .pricing-features li {
+        color: #e0e0e0;
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .pricing-features li:last-child {
+        border-bottom: none;
+      }
+      
+      .pricing-footer {
+        margin-top: auto;
+      }
+      
+      .btn-outline-primary {
+        border-color: #00ff88;
+        color: #00ff88;
+      }
+      
+      .btn-outline-primary:hover {
+        background: #00ff88;
+        color: #000;
+      }
+      
+      .why-choose-section {
+        padding: 4rem 0;
+      }
+      
+      .feature-highlight-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        text-align: center;
+        height: 100%;
+        transition: transform 0.3s ease;
+      }
+      
+      .feature-highlight-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.08);
+      }
+      
+      .feature-highlight-card .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        display: block;
+      }
+      
+      .feature-highlight-card h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #fff;
+      }
+      
+      .feature-highlight-card p {
+        color: #e0e0e0;
+        font-size: 1rem;
+        line-height: 1.5;
+        margin: 0;
+      }
+    </style>
+    <title>KasiKash - Digital Stokvel Management</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg py-3">
+      <div class="container">
+        <a class="navbar-brand text-light" href="/" style="font-weight: 600; font-size: 1.5rem;">KasiKash</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/features">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-primary ml-2" href="/register">Get Started</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row align-items-center hero-section">
+        <div class="col-lg-6">
+          <h1 class="hero-title">Manage Your Stokvel Smarter</h1>
+          <p class="hero-subtitle">
+            Join thousands of South Africans using KasiKash to manage their stokvel groups. 
+            Track contributions, manage payouts, and grow your community wealth together.
+          </p>
+        </div>
+      </div>
+
+      <!-- Why Choose KasiKash Section -->
+      <div class="why-choose-section py-5">
+        <div class="text-center mb-5">
+          <h2 class="hero-title">Why Choose KasiKash?</h2>
+          <p class="hero-subtitle">Built specifically for South African communities with features that matter most to stokvel success.</p>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-md-4 mb-4">
+            <div class="feature-highlight-card">
+              <div class="feature-icon">🏦</div>
+              <h3>SARB Regulated</h3>
+              <p>Licensed and regulated financial services provider</p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="feature-highlight-card">
+              <div class="feature-icon">🔒</div>
+              <h3>Bank-Level Security</h3>
+              <p>256-bit encryption and secure infrastructure</p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="feature-highlight-card">
+              <div class="feature-icon">👥</div>
+              <h3>Community Focused</h3>
+              <p>Built by and for South African communities</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing Plans Section -->
+      <div class="pricing-section py-5">
+        <div class="text-center mb-5">
+          <h2 class="hero-title">Choose Your Stokvel Plan</h2>
+          <p class="hero-subtitle">From testing the waters to building wealth empires, we have a plan that grows with your community dreams.</p>
+        </div>
+
+                <div class="row">
+          <!-- Free Plan -->
+          <div class="col-md-6 col-lg-3 mb-4">
+            <div class="pricing-card">
+              <div class="pricing-header">
+                <span class="plan-icon">🆓</span>
+                <h3>Free</h3>
+                <div class="price">R0<span>/month</span></div>
+                <p class="plan-description">Explore the basics. Ideal for individuals or small groups testing the waters.</p>
+              </div>
+              <div class="pricing-features">
+                <ul>
+                  <li>Up to 5 Members</li>
+                  <li>Monthly Tips & Resources</li>
+                  <li>Events (Pay-as-you-go)</li>
+                  <li>Marketplace (Pay-as-you-go)</li>
+                  <li>Savings Account (6.00% p.a.)</li>
+                </ul>
+              </div>
+              <div class="pricing-footer">
+                <a href="/register" class="btn btn-outline-primary btn-block">Get Started Free</a>
+              </div>
+                        </div>
+                    </div>
+
+          <!-- Silver Plan -->
+          <div class="col-md-6 col-lg-3 mb-4">
+            <div class="pricing-card">
+              <div class="pricing-header">
+                <span class="plan-icon">🥈</span>
+                <h3>Silver</h3>
+                <div class="price">R50<span>/month</span></div>
+                <p class="plan-description">Designed for new or smaller stokvels ready to benefit from better rates and access.</p>
+              </div>
+              <div class="pricing-features">
+                <ul>
+                  <li>Up to 10 Members (+R50 per 10 more)</li>
+                  <li>Monthly Learning Session</li>
+                  <li>Events (Up to 10% Discount)</li>
+                  <li>Marketplace (Up to 10% Discount)</li>
+                  <li>Savings Account (6.25% p.a.)</li>
+                </ul>
+              </div>
+              <div class="pricing-footer">
+                <a href="/register" class="btn btn-primary btn-block">Choose Silver</a>
+              </div>
+                    </div>
+                </div>
+
+          <!-- Gold Plan -->
+          <div class="col-md-6 col-lg-3 mb-4">
+            <div class="pricing-card featured">
+              <div class="pricing-header">
+                <span class="popular-badge">Most Popular</span>
+                <span class="plan-icon">🥇</span>
+                <h3>Gold</h3>
+                <div class="price">R100<span>/month</span></div>
+                <p class="plan-description">For growing stokvels looking for extra support and smarter savings.</p>
+              </div>
+              <div class="pricing-features">
+                <ul>
+                  <li>Up to 15 Members (+R75 per 10 more)</li>
+                  <li>Group Coach Access</li>
+                  <li>Events (Up to 30% Discount)</li>
+                  <li>Marketplace (Up to 30% Discount)</li>
+                  <li>Savings Account (6.75% p.a.)</li>
+                </ul>
+                        </div>
+              <div class="pricing-footer">
+                <a href="/register" class="btn btn-primary btn-block">Choose Gold</a>
+                            </div>
+                        </div>
+                    </div>
+
+          <!-- Platinum Plan -->
+          <div class="col-md-6 col-lg-3 mb-4">
+            <div class="pricing-card">
+              <div class="pricing-header">
+                <span class="plan-icon">💎</span>
+                <h3>Platinum</h3>
+                <div class="price">R150<span>/month</span></div>
+                <p class="plan-description">The ultimate package for large, dynamic stokvels and leadership teams.</p>
+              </div>
+              <div class="pricing-features">
+                <ul>
+                  <li>Up to 20 Members (+R100 per 10 more)</li>
+                  <li>Executive Coach</li>
+                  <li>0.5 Hour Quarterly Check-in</li>
+                  <li>Events (Up to 50% Discount)</li>
+                  <li>Exhibitor Stand</li>
+                  <li>Marketplace (Up to 50% Discount)</li>
+                  <li>Savings Account (7.25% p.a.)</li>
+                  <li>Priority Support</li>
+                  <li>Custom Reports</li>
+                  <li>Coming Soon: Member App</li>
+                </ul>
+                    </div>
+              <div class="pricing-footer">
+                <a href="/register" class="btn btn-primary btn-block">Choose Platinum</a>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          <p class="text-light">All plans include our core stokvel management tools and 24/7 customer support.</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+    <script>
+      setTimeout(function() {
+                    $('#alert').alert('close');
+                }, 3000);
+    </script>
+  </body>
+</html>

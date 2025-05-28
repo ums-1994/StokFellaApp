@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+        <!-- Bootstrap CSS -->
+        <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Google Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+        <title>Expense Tracker - Home</title>
+
+        <!-- Insert React (inline script) for WelcomePage -->
+        <script type="module">
+          import React from "https://esm.sh/react@18.2.0";
+          window.WelcomePageReactCode = `
+          function WelcomePage() {
+            return (
+              <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-8 text-center">
+                <div className="bg-white rounded-2xl shadow-xl p-10 max-w-3xl w-full">
+                  <h1 className="text-4xl font-bold text-blue-700 mb-4">Welcome to KasiKash</h1>
+                  <p className="text-gray-700 text-lg mb-6">
+                    KasiKash is your digital stokvel manager — designed to simplify, secure, and strengthen community savings groups across South Africa.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                    <div className="p-4 bg-blue-50 rounded-xl">
+                      <h2 className="text-xl font-semibold text-blue-600">📊 Transparent Group Management</h2>
+                      <p className="text-sm text-gray-600 mt-2">Create, manage, and track your stokvel groups online with ease. Everything is accessible in real-time.</p>
+                    </div>
+                    <div className="p-4 bg-blue-50 rounded-xl">
+                      <h2 className="text-xl font-semibold text-blue-600">💸 Easy Contributions & Payouts</h2>
+                      <p className="text-sm text-gray-600 mt-2">Monitor who's paid what, automate calculations, and schedule disbursements hassle-free.</p>
+                    </div>
+                    <div className="p-4 bg-blue-50 rounded-xl">
+                      <h2 className="text-xl font-semibold text-blue-600">👥 Member Transparency</h2>
+                      <p className="text-sm text-gray-600 mt-2">Give every member access to group activity, finances, and reports to foster trust.</p>
+                    </div>
+                    <div className="p-4 bg-blue-50 rounded-xl">
+                      <h2 className="text-xl font-semibold text-blue-600">📚 Financial Education</h2>
+                      <p className="text-sm text-gray-600 mt-2">Access tips and learning resources to strengthen your group's financial literacy.</p>
+                    </div>
+                  </div>
+                  <div className="mt-8">
+                    <a href="/signup" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full text-lg font-medium shadow hover:bg-blue-700 transition">Get Started</a>
+                  </div>
+                </div>
+              </div>
+            );
+          }
+          `;
+        </script>
+    </head>
+    <body class="page-bg">
+     <div class="bg-nav d-flex flex-column flex-md-row align-items-center pb-0 mb-0 border-bottom">
+      <h5 class="m-3 mr-md-auto font-weight-normal"><a href="/" style="text-decoration : none">Expense Tracker - {{ user_name }}</a></h5>
+
+      <nav class="m-2 my-md-0 mr-md-3">
+        <a class="py-2 m-2 text-dark" href="/home">Home</a>
+        <a class="py-2 m-2 text-dark" href="/analysis">Analysis</a>
+        <a class="py-2 m-2 text-dark" href="/profile">Profile</a>
+        <a class="py-2 m-2 text-dark" href="/contact">Contact Us</a>
+      </nav>
+         <a class="btn m-2 btn-outline-warning" href="/logout">Logout</a>
+    </div>
+     <div>
+        {% for message in get_flashed_messages() %}
+         <div class="alert alert-warning alert-dismissible fade show" id="alert" role="alert">
+                    {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+         {% endfor %}
+     </div>
+
+     <!-- Main container-->
+     <div class="container ">
+        <!-- Tiles row-->
+         <div class="row my-2 ">
+             <div class="col-md-3">
+                 <div class="card deep-purple my-1">
+                     <div class="card-body ">
+                         <h5 class="text-center">Total Earnings</h5>
+                         <h2 class="text-center">₹ {{ earning }}</h2>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-3">
+                 <div class="card alive my-1">
+                     <div class="card-body ">
+                         <h5 class="text-center">Total Spends</h5>
+                         <h2 class="text-center">₹ {{ spend }}</h2>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-3">
+                 <div class="card citrus my-1">
+                     <div class="card-body ">
+                         <h5 class="text-center">Total Investments</h5>
+                         <h2 class="text-center">₹ {{ invest }}</h2>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-3">
+                 <div class="card green my-1">
+                     <div class="card-body ">
+                         <h5 class="text-center">Total Savings</h5>
+                         <h2 class="text-center">₹ {{ saving }}</h2>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <br>
+
+<!--         Table records-->
+         <div  class="row mt-3">
+             <div class="col-md-8">
+                 <!-- Removed Latest 5 Records section -->
+             </div>
+             {% if df_size==0 %}
+         <div>
+             <h3>No records found, seems you are a new user</h3>
+         </div>
+         {% else %}
+
+            <!--  bar chart-->
+             <div class="col-md-4 chart_border">
+                    <div id="bar" class="chart"></div>
+             </div>
+         </div>
+         <br>
+         <br>
+         <div class="row ">
+             <div class="col-md-7 chart_border">
+                 <div id="stack" class="chart m-1"></div>
+             </div>
+              <div class="col-md-5">
+                  <div class="row m-1">
+                      <div class="col-sm-12">
+                          <div class="card card-body m-1 p-1 panel list">
+                              <h4 align="center">Monthly Record (₹)</h4>
+                              <li>
+                                  <h5 class="text-warning">Month</h5>
+                                  <span>Income</span>
+                                  <span>Spend</span>
+                                  <span>Invest</span>
+                                  <span>Saving</span>
+                              </li>
+
+                              {% for month in monthly_data %}
+                              <li>
+                                  <h6>{{ month['Month'] }}</h6>
+                                  <span>{{ month['Earning'] }}</span>
+                                  <span>{{ month['Spend'] }}</span>
+                                  <span>{{ month['Investment'] }}</span>
+                                  <span>{{ month['Saving'] }}</span>
+                              </li>
+                              {% endfor %}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+         </div>
+
+         <br>
+         <br>
+
+         <div class="row">
+             <div class="sales">
+                 {% for data in card_data %}
+                 <div class="text-center">
+                    <h5 class="p-0 m-1">{{ data['head'] }}</h5>
+                    <h1>{{ data['main'] }}</h1>
+                    <small>{{ data['msg'] }}</small>
+                 </div>
+                 {% endfor %}
+             </div>
+         </div>
+         <br>
+         <br>
+
+         <div class="row">
+             <div class="col-md-4">
+                 <div class="goals">
+                     <h5>Monthly Goals <h6>(w.r.t. last month)</h6></h5>
+                     {% for goal in goals %}
+                        <div class="goal-panel goal">
+
+                                {% if goal['status']=='increased' %}
+                                    {% if goal['type']=='Spend' %}
+                            <span class="material-icons icon-color-down">
+                                            thumb_down
+                                    {% else %}
+                            <span class="material-icons icon-color-up">
+                                        thumb_up
+                                    {% endif %}
+                                {% else %}
+                                    {% if goal['type']=='Spend' %}
+                            <span class="material-icons icon-color-up">
+                                            thumb_up
+                                    {% else %}
+                            <span class="material-icons icon-color-down">
+                                        thumb_down
+                                    {% endif %}
+                                {% endif %}
+                            </span>
+                            <div>
+                               <div class="goal-title">
+                                    <h6>{{ goal['type'] }}</h6>
+                                    <h5>{{ goal['value'] }}</h5>
+                               </div>
+                                <small>{{ goal['status'] }} by {{ goal['percent'] }}% in this month.</small>
+                            </div>
+                        </div>
+                     {% endfor %}
+                 </div>
+             </div>
+             <div class="col-md-8 goal-panel">
+                 <div class="row justify-content-center">
+                     <h3 class="text-center text-white align-center">Data in Pie Chart</h3>
+                 </div>
+                 <div class="row my-3">
+                     <div class="col-md-4 d-flex justify-content-around">
+                         <div id="pie11" class="chart"></div>
+                     </div>
+                     <div class="col-md-4 d-flex justify-content-around">
+                         <div id="pie22" class="chart"></div>
+                     </div>
+                     <div class="col-md-4 d-flex justify-content-around">
+                         <div id="pie55" class="chart"></div>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-md-4 d-flex justify-content-around">
+                         <div id="pie33" class="chart"></div>
+                     </div>
+                     <div class="col-md-4 d-flex justify-content-around">
+                         <div id="pie44" class="chart"></div>
+                     </div>
+                     <div class="col-md-4 d-flex justify-content-around">
+                         <div id="pie66" class="chart"></div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+         {% endif %}
+         <br>
+         <br>
+     </div>
+
+     <div class="container">
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+          <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+            <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+          </a>
+          <span class="text-muted">&copy; 2022 Expense Tracker, Inc</span>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript">
+        setTimeout(function () {
+                    // Closing the alert
+                    $('#alert').alert('close');
+                }, 3000);
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   <script src='https://cdn.plot.ly/plotly-latest.min.js'></script> <!-- Plotly CDN -->
+    </body>
+
+    <script type='text/javascript'>
+      var graphs = {{bar | safe}};
+      Plotly.plot('bar',graphs,{});
+
+      var graphs4 = {{stack_bar | safe}};
+      Plotly.plot('stack',graphs4,{});
+
+      var pie_graph1 = {{pie1 | safe}};
+      var pie_graph2 = {{pie2 | safe}};
+      var pie_graph3 = {{pie3 | safe}};
+      var pie_graph4 = {{pie4 | safe}};
+      var pie_graph5 = {{pie5 | safe}};
+      var pie_graph6 = {{pie6 | safe}};
+      Plotly.plot('pie11',pie_graph1,{});
+      Plotly.plot('pie22',pie_graph2,{});
+      Plotly.plot('pie55',pie_graph5,{});
+      Plotly.plot('pie33',pie_graph3,{});
+      Plotly.plot('pie44',pie_graph4,{});
+      Plotly.plot('pie66',pie_graph6,{});
+
+    </script>
+</html>
